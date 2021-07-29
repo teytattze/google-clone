@@ -25,11 +25,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const useDummyData = false;
 	const startIndex = context.query.start || '0';
 
+	console.log(context.query.term);
+
 	const data = useDummyData
 		? Response
 		: await fetch(
 				`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=${process.env.CONTEXT_KEY}&q=${context.query.term}&start=${startIndex}`,
 		  ).then((res) => res.json());
+
+	console.log(data);
 
 	return {
 		props: {
